@@ -17,9 +17,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscGolfPuttMiniGame.Window
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		DiscGolfPuttMiniGame\DiscGolfPuttMiniGame\DiscGolfPuttMiniGame.projitems*{38376ebe-92ca-4500-80b3-d2050959707f}*SharedItemsImports = 4
+		DiscGolfPuttMiniGame\DiscGolfPuttMiniGame\DiscGolfPuttMiniGame.projitems*{4d340839-ffea-45a0-a060-c7a6e5779c74}*SharedItemsImports = 4
 		DiscGolfPuttMiniGame\DiscGolfPuttMiniGame\DiscGolfPuttMiniGame.projitems*{647d499c-b832-4e65-8c2a-bafae26a6530}*SharedItemsImports = 13
 		DiscGolfPuttMiniGame\DiscGolfPuttMiniGame\DiscGolfPuttMiniGame.projitems*{846f2bfb-e335-4dfa-b0de-b52ac48aef3b}*SharedItemsImports = 4
 		DiscGolfPuttMiniGame\DiscGolfPuttMiniGame\DiscGolfPuttMiniGame.projitems*{a3b92158-a581-4640-9ab2-49f78f3e45d1}*SharedItemsImports = 4
+		DiscGolfPuttMiniGame\DiscGolfPuttMiniGame\DiscGolfPuttMiniGame.projitems*{ba469fef-14df-48ee-b728-1a378520f99b}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
