@@ -28,7 +28,7 @@ namespace DiscGolfPuttMiniGame.WinPhone
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
-            LoadApplication(new DiscGolfPuttMiniGame.App());
+            LoadApplication(new Portable.App());
         }
 
         /// <summary>

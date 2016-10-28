@@ -21,7 +21,7 @@ namespace DiscGolfPuttMiniGame.UWP
         {
             this.InitializeComponent();
 
-            LoadApplication(new DiscGolfPuttMiniGame.App());
+            LoadApplication(new Portable.App());
         }
     }
 }

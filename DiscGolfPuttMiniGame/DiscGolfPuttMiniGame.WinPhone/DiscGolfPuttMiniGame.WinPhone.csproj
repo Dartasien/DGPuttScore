@@ -137,6 +137,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DiscGolfPuttMineGame.Portable\DiscGolfPuttMiniGame.Portable.csproj">
+      <Project>{23e30408-a581-4878-95db-c1c8ff6a9c22}</Project>
+      <Name>DiscGolfPuttMiniGame.Portable</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

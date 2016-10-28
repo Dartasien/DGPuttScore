@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using DiscGolfPuttMiniGame.Portable.Data;
+using DiscGolfPuttMiniGame.Portable.Views;
 using Xamarin.Forms;
 
-namespace DiscGolfPuttMiniGame
+namespace DiscGolfPuttMiniGame.Portable
 {
 	public class App : Application
 	{
+	    private static ScoreTrackerDatabase _database;
+
 		public App ()
 		{
 			// The root page of your application
@@ -25,9 +24,13 @@ namespace DiscGolfPuttMiniGame
 			};
 		}
 
-		protected override void OnStart ()
+	    public static ScoreTrackerDatabase Database => _database ?? (_database = new ScoreTrackerDatabase());
+
+	    protected override void OnStart ()
 		{
 			// Handle when your app starts
+            var mainPage = new NavigationPage( new MainPageX());
+	        MainPage.Navigation.PushModalAsync(mainPage, false);
 		}
 
 		protected override void OnSleep ()

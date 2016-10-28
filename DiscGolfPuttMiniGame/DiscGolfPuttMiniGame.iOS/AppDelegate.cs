@@ -23,7 +23,7 @@ namespace DiscGolfPuttMiniGame.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init ();
-			LoadApplication (new DiscGolfPuttMiniGame.App ());
+			LoadApplication (new Portable.App ());
 
 			return base.FinishedLaunching (app, options);
 		}

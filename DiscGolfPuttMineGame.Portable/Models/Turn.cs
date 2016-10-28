@@ -1,6 +1,6 @@
 using SQLite.Net.Attributes;
 
-namespace DiscGolfPuttMineGame.Models
+namespace DiscGolfPuttMineGame.Portable.Models
 {
     public class Turn
     {
