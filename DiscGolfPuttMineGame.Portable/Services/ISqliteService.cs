@@ -1,6 +1,6 @@
 using SQLite.Net;
 
-namespace DiscGolfPuttMineGame.Portable.Services
+namespace DiscGolfPuttMiniGame.Portable.Services
 {
     public interface ISqliteService
     {

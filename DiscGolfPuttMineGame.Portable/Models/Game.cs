@@ -1,19 +1,19 @@
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using SQLite.Net.Attributes;
 
-namespace DiscGolfPuttMineGame.Portable.Models
+namespace DiscGolfPuttMiniGame.Portable.Models
 {
     public class Game
     {
         public Game()
         {
-            Rounds = new List<Round>();
-            Players = new List<Player>();
+            Rounds = new ObservableCollection<Round>();
+            Players = new ObservableCollection<Player>();
         }
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public List<Round> Rounds { get; set; }
-        public List<Player> Players { get; set; }
+        public ObservableCollection<Round> Rounds { get; set; }
+        public ObservableCollection<Player> Players { get; set; }
         public int WinnerId { get; set; }
         public bool IsCurrent { get; set; }
     }

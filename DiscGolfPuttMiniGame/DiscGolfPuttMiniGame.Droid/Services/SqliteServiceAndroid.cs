@@ -1,8 +1,10 @@
 using System.IO;
-using DiscGolfPuttMineGame.Portable.Services;
+using DiscGolfPuttMiniGame.Droid.Services;
+using DiscGolfPuttMiniGame.Portable.Services;
 using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
 
+[assembly: Xamarin.Forms.Dependency(typeof(SqliteServiceAndroid))]
 namespace DiscGolfPuttMiniGame.Droid.Services
 {
     public class SqliteServiceAndroid : ISqliteService

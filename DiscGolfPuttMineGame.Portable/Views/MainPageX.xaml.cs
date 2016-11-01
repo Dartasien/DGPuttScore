@@ -1,5 +1,6 @@
 ﻿using System;
-
+using DiscGolfPuttMiniGame.Portable.Data;
+using DiscGolfPuttMiniGame.Portable.Models;
 using Xamarin.Forms;
 
 namespace DiscGolfPuttMiniGame.Portable.Views
@@ -14,7 +15,24 @@ namespace DiscGolfPuttMiniGame.Portable.Views
 
         private void StartScoreTrackerGame_OnClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var count = int.Parse(PlayerCount.Text);
+            var game = new Game();
+
+            var database = new ScoreTrackerDatabase();
+
+            var defaultPlayer = database.GetDefaultPlayer() ?? new Player
+            {
+                NickName = "Player1",
+                IsDefault = true
+            };
+
+            game.Players.Add(defaultPlayer);
+            for (var i = 0; i < count - 1; i++)
+            {
+                game.Players.Add(new Player());
+            }
+            var addPlayerPage = new AddPlayersX {BindingContext = game};
+            Navigation.PushModalAsync(addPlayerPage);
         }
     }
 }
