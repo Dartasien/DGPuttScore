@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using SQLite.Net.Attributes;
 
 namespace DiscGolfPuttMiniGame.Portable.Models
@@ -7,13 +7,13 @@ namespace DiscGolfPuttMiniGame.Portable.Models
     {
         public Game()
         {
-            Rounds = new ObservableCollection<Round>();
-            Players = new ObservableCollection<Player>();
+            Rounds = new List<Round>();
+            Players = new List<Player>();
         }
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public ObservableCollection<Round> Rounds { get; set; }
-        public ObservableCollection<Player> Players { get; set; }
+        public List<Round> Rounds { get; set; }
+        public List<Player> Players { get; set; }
         public int WinnerId { get; set; }
         public bool IsCurrent { get; set; }
     }
