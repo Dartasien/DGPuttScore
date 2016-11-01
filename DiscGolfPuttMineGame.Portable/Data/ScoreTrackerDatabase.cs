@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscGolfPuttMineGame.Portable.Models;
-using DiscGolfPuttMineGame.Portable.Services;
+﻿using System.Linq;
+using DiscGolfPuttMiniGame.Portable.Models;
+using DiscGolfPuttMiniGame.Portable.Services;
 using SQLite.Net;
 using SQLiteNetExtensions.Extensions;
 using Xamarin.Forms;
