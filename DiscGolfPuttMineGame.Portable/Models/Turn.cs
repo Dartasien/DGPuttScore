@@ -1,4 +1,6 @@
 using SQLite.Net.Attributes;
+using SQLiteNetExtensions.Attributes;
+// ReSharper disable UnusedMember.Global
 
 namespace DiscGolfPuttMiniGame.Portable.Models
 {
@@ -6,11 +8,16 @@ namespace DiscGolfPuttMiniGame.Portable.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        [ForeignKey(typeof(Round))]
         public int RoundId { get; set; }
-        public Round Round { get; set; }
+        [ForeignKey(typeof(Player))]
         public int PlayerId { get; set; }
-        public Player Player { get; set; }
         public int Score { get; set; }
         public bool IsCurrent { get; set; }
+
+        [ManyToOne]
+        public Round Round { get; set; }
+        [ManyToOne]
+        public Player Player { get; set; }
     }
 }

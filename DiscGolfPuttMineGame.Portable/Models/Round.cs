@@ -1,5 +1,7 @@
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using SQLite.Net.Attributes;
+using SQLiteNetExtensions.Attributes;
+// ReSharper disable UnusedMember.Global
 
 namespace DiscGolfPuttMiniGame.Portable.Models
 {
@@ -7,12 +9,18 @@ namespace DiscGolfPuttMiniGame.Portable.Models
     {
         public Round()
         {
-            Turns = new ObservableCollection<Turn>();
+            Turns = new List<Turn>();
         }
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public ObservableCollection<Turn> Turns { get; set; }
         public int Score { get; set; }
         public bool IsCurrent { get; set; }
+
+        [ForeignKey(typeof(Game))]
+        public int GameId { get; set; }
+        [ManyToOne]
+        public Game Game { get; set; }
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<Turn> Turns { get; set; }
     }
 }
