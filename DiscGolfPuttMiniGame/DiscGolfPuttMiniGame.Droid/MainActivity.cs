@@ -1,5 +1,4 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
 using DiscGolfPuttMiniGame.Portable;
 
@@ -15,20 +14,7 @@ namespace DiscGolfPuttMiniGame.Droid
             Xamarin.Forms.Forms.Init(this, bundle);
 
             LoadApplication(new App());
-            //// Set our view from the "main" layout resource
-            //SetContentView(Resource.Layout.Main);
-            //// Get our button from the layout resource,
-            //// and attach an event to it
-            //var button = FindViewById<Button>(Resource.Id.playerCountButton);
 
-            //button.Click += delegate
-            //{
-            //    var playerCountText = FindViewById<EditText>(Resource.Id.playerCount);
-            //    var count = playerCountText.Text;
-            //    var addPlayersActivity = new Intent(this, typeof(AddPlayersActivity));
-            //    addPlayersActivity.PutExtra("count", count);
-            //    StartActivity(addPlayersActivity);
-            //};
         }
     }
 }
