@@ -3,7 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DiscGolfPuttMiniGame.Portable.Views.AddPlayersX">
   <Grid>
-    <Label Text="Testing" VerticalOptions="Center" HorizontalOptions="Center" />
-    <Label Text="{Binding NickName}"></Label>
+    <Label Text="Choose names for your players." FontSize="25" HorizontalOptions="Center"></Label>
+    <ListView ItemsSource="{Binding Players}" VerticalOptions="Center" HorizontalOptions="Center">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <EntryCell Text="{Binding NickName}"></EntryCell>
+        </DataTemplate>  
+      </ListView.ItemTemplate>
+    </ListView>
+    <Button Text="Start Game!" FontSize="25" HorizontalOptions="Center" VerticalOptions="End" Clicked="StartButton_OnClicked"></Button>
   </Grid>
 </ContentPage>
