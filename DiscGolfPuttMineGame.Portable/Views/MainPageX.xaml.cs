@@ -20,6 +20,7 @@ namespace DiscGolfPuttMiniGame.Portable.Views
 
             var database = new ScoreTrackerDatabase();
 
+
             var defaultPlayer = database.GetDefaultPlayer() ?? new Player
             {
                 NickName = "Player1",
@@ -27,10 +28,15 @@ namespace DiscGolfPuttMiniGame.Portable.Views
             };
 
             game.Players.Add(defaultPlayer);
-            for (var i = 0; i < count - 1; i++)
+            for (var i = 1; i < count; i++)
             {
-                game.Players.Add(new Player());
+                var name = "Player" + (i+1);
+                game.Players.Add(new Player
+                {
+                    NickName = name
+                });
             }
+            game.IsCurrent = true;
             var addPlayerPage = new AddPlayersX {BindingContext = game};
             Navigation.PushModalAsync(addPlayerPage);
         }

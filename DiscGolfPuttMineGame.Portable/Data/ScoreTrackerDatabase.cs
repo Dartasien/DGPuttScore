@@ -19,6 +19,7 @@ namespace DiscGolfPuttMiniGame.Portable.Data
             database.CreateTable<Game>();
             database.CreateTable<Round>();
             database.CreateTable<Turn>();
+            database.CreateTable<GamePlayer>();
         }
 
 
@@ -42,6 +43,16 @@ namespace DiscGolfPuttMiniGame.Portable.Data
         public void InsertGame(Game game)
         {
             database.InsertWithChildren(game);
+        }
+
+        public void SaveGame(Game game)
+        {
+            database.UpdateWithChildren(game);
+        }
+
+        public Game RetrieveGame(int id)
+        {
+           return database.GetWithChildren<Game>(id);
         }
 
         public void InsertRound(Round round)

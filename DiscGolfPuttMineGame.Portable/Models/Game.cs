@@ -1,30 +1,90 @@
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using DiscGolfPuttMiniGame.Portable.Annotations;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 // ReSharper disable UnusedMember.Global
 
 namespace DiscGolfPuttMiniGame.Portable.Models
 {
-    public class Game
+    public class Game : INotifyPropertyChanged
     {
         public Game()
         {
-            Rounds = new List<Round>();
-            Players = new List<Player>();
+            Rounds = new ObservableCollection<Round>();
+            Players = new ObservableCollection<Player>();
         }
+
+        private int _id;
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-        public bool IsCurrent { get; set; }
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
+
+        private bool _isCurrent;
+        public bool IsCurrent {
+            get
+            {
+                return _isCurrent;
+            }
+            set
+            {
+                _isCurrent = value;
+                OnPropertyChanged(nameof(IsCurrent));
+            }
+        }
+
+        private int _winningPlayerId;
         [ForeignKey(typeof(Player))]
-        public int WinningPlayerId { get; set; }
+        public int WinningPlayerId {
+            get
+            {
+                return _winningPlayerId;
+            }
+            set
+            {
+                _winningPlayerId = value;
+                OnPropertyChanged(nameof(WinningPlayerId));
+            }
+        }
 
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         // ReSharper disable once MemberCanBePrivate.Global
-        public List<Round> Rounds { get; set; }
-        [OneToMany(CascadeOperations = CascadeOperation.All)]
-        public List<Player> Players { get; set; }
+        public ObservableCollection<Round> Rounds { get; set; }
+        [ManyToMany(typeof(GamePlayer), CascadeOperations = CascadeOperation.All)]
+        public ObservableCollection<Player> Players { get; set; }
+
+        private Player _winningPlayer;
         [ManyToOne]
-        public Player WinningPlayer { get; set; }
+        public Player WinningPlayer {
+            get
+            {
+                return _winningPlayer;
+            }
+            set
+            {
+                _winningPlayer = value;
+                OnPropertyChanged(nameof(WinningPlayer));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
