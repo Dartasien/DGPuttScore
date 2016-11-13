@@ -3,13 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              x:Class="DiscGolfPuttMiniGame.Portable.Views.GameRoundsX">
-  <forms:CarouselView ItemsSource="{Binding Turns}">
-    <forms:CarouselView.ItemTemplate>
-       <DataTemplate>
-         <StackLayout>
-         <Label Text="{Binding Player.NickName}"></Label>
-         </StackLayout>
-       </DataTemplate>
-    </forms:CarouselView.ItemTemplate>
-  </forms:CarouselView>
+  <Grid RowSpacing="0">
+    <Grid.RowDefinitions>
+      <RowDefinition Height=".1*"/>
+      <RowDefinition Height=".75*"/>
+      <RowDefinition Height=".15*"/>
+    </Grid.RowDefinitions>
+    <Label x:Name="RoundCountLabel" Text="{Binding RoundCount}" FontSize="25" HorizontalOptions="Center" Grid.Row="0"></Label>
+    <forms:CarouselView ItemsSource="{Binding Turns}" Grid.Row="1">
+      <forms:CarouselView.ItemTemplate>
+         <DataTemplate>
+           <StackLayout>
+             <Label Text="{Binding Player.NickName}" FontSize="25" HorizontalOptions="Center"></Label>
+             <Label Text="{Binding CurrentRange}" FontSize="25" HorizontalOptions="Center"></Label>
+             <Entry Text="{Binding Score}"></Entry>
+           </StackLayout>
+         </DataTemplate>
+      </forms:CarouselView.ItemTemplate>
+    </forms:CarouselView>
+    <Button x:Name="FinishTurnButton" Grid.Row="2" Clicked="FinishTurnButton_OnClicked"></Button>
+  </Grid>
 </ContentPage>

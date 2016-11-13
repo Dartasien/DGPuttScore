@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DiscGolfPuttMiniGame.Portable.Views.WinnerNewGame">
+  <StackLayout>
+    <Label Text="WINNER:" VerticalOptions="Center" HorizontalOptions="Center" FontSize="50"/>
+    <Label Text="{Binding WinningPlayer.NickName}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="75"/>
+    <Label Text="With A Score Of:" VerticalOptions="Center" HorizontalOptions="Center" FontSize="50"/>
+    <Label Text="{Binding WinningScore}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="75"/>
+    <Button x:Name="NewGame" Text="Start New Game?" Clicked="NewGame_OnClicked" HorizontalOptions="Center" VerticalOptions="End"></Button>
+  </StackLayout>
+</ContentPage>

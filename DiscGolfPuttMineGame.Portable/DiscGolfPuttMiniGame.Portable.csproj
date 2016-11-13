@@ -53,9 +53,11 @@
     <Compile Include="Views\GameRoundsX.xaml.cs">
       <DependentUpon>GameRoundsX.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPage.cs" />
     <Compile Include="Views\MainPageX.xaml.cs">
       <DependentUpon>MainPageX.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WinnerNewGame.xaml.cs">
+      <DependentUpon>WinnerNewGame.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\GameRoundsX.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\WinnerNewGame.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
