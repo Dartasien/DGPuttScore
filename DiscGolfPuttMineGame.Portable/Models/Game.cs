@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using DiscGolfPuttMiniGame.Portable.Annotations;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
-// ReSharper disable UnusedMember.Global
 
 namespace DiscGolfPuttMiniGame.Portable.Models
 {
@@ -58,9 +57,22 @@ namespace DiscGolfPuttMiniGame.Portable.Models
             }
         }
 
+        private int _winningScore;
+        public int WinningScore
+        {
+            get
+            {
+                return _winningScore;
+            }
+            set
+            {
+                _winningScore = value;
+                OnPropertyChanged(nameof(WinningScore));
+            }
+        }
+
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
-        // ReSharper disable once MemberCanBePrivate.Global
         public ObservableCollection<Round> Rounds { get; set; }
         [ManyToMany(typeof(GamePlayer), CascadeOperations = CascadeOperation.All)]
         public ObservableCollection<Player> Players { get; set; }

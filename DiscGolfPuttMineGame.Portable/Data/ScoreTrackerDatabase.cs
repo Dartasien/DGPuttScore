@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using DiscGolfPuttMiniGame.Portable.Models;
 using DiscGolfPuttMiniGame.Portable.Services;
 using SQLite.Net;
@@ -40,29 +42,21 @@ namespace DiscGolfPuttMiniGame.Portable.Data
             return players.FirstOrDefault(p => p.IsDefault);
         }
 
-        public void InsertGame(Game game)
+        public void Insert<T>(T item) where T : class 
         {
-            database.InsertWithChildren(game);
+            database.InsertWithChildren(item, true);
         }
 
-        public void SaveGame(Game game)
+        public void Save<T>(T item) where T : class
         {
-            database.UpdateWithChildren(game);
+            database.UpdateWithChildren(item);
         }
 
-        public Game RetrieveGame(int id)
+        public T GetItem<T>(int id) where T : class
         {
-           return database.GetWithChildren<Game>(id);
-        }
-
-        public void InsertRound(Round round)
-        {
-            database.InsertWithChildren(round);
-        }
-
-        public void InsertTurn(Turn turn)
-        {
-            database.InsertWithChildren(turn);
+            var item = database.GetWithChildren<T>(id);
+            database.GetChildren(item, true);
+            return item;
         }
     }
 }

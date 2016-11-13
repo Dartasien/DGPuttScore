@@ -143,6 +143,9 @@ namespace DiscGolfPuttMiniGame.Portable.Models
             }
         }
 
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public ObservableCollection<Turn> Turns { get; set; }
+
         [ManyToMany(typeof(GamePlayer),CascadeOperations = CascadeOperation.All)]
         // ReSharper disable once MemberCanBePrivate.Global
         public ObservableCollection<Game> Games { get; set; }

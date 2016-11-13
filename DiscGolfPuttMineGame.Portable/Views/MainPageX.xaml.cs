@@ -26,15 +26,17 @@ namespace DiscGolfPuttMiniGame.Portable.Views
                 NickName = "Player1",
                 IsDefault = true
             };
-
+            database.Insert(defaultPlayer);
             game.Players.Add(defaultPlayer);
             for (var i = 1; i < count; i++)
             {
                 var name = "Player" + (i+1);
-                game.Players.Add(new Player
+                var player = new Player
                 {
                     NickName = name
-                });
+                };
+                game.Players.Add(player);
+                database.Insert(player);
             }
             game.IsCurrent = true;
             var addPlayerPage = new AddPlayersX {BindingContext = game};
