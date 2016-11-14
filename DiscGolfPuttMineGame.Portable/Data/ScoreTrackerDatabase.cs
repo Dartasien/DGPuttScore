@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using DiscGolfPuttMiniGame.Portable.Models;
 using DiscGolfPuttMiniGame.Portable.Services;
 using SQLite.Net;
@@ -11,52 +9,54 @@ namespace DiscGolfPuttMiniGame.Portable.Data
 {
     public class ScoreTrackerDatabase
     {
-        static object locker = new object();
-        SQLiteConnection database;
+        private static readonly object Locker = new object();
+        private readonly SQLiteConnection _database;
 
         public ScoreTrackerDatabase()
         {
-            database = DependencyService.Get<ISqliteService>().GetConnection();
-            database.CreateTable<Player>();
-            database.CreateTable<Game>();
-            database.CreateTable<Round>();
-            database.CreateTable<Turn>();
-            database.CreateTable<GamePlayer>();
-        }
-
-
-        public void InsertPlayer(Player player)
-        {
-            database.InsertWithChildren(player);
-        }
-
-        public Player GetPlayer(int id)
-        {
-            return database.GetWithChildren<Player>(id);
+            _database = DependencyService.Get<ISqliteService>().GetConnection();
+            _database.CreateTable<Player>();
+            _database.CreateTable<Game>();
+            _database.CreateTable<Round>();
+            _database.CreateTable<Turn>();
+            _database.CreateTable<GamePlayer>();
         }
 
         public Player GetDefaultPlayer()
         {
-            var players = database.GetAllWithChildren<Player>();
-
-            return players.FirstOrDefault(p => p.IsDefault);
+            lock (Locker)
+            {
+                var players = _database.GetAllWithChildren<Player>();
+                var defaultPlayer = players.FirstOrDefault(p => p.IsDefault);
+                _database.GetChildren(defaultPlayer, true);
+                return defaultPlayer;
+            }
         }
 
         public void Insert<T>(T item) where T : class 
         {
-            database.InsertWithChildren(item, true);
+            lock (Locker)
+            {
+                _database.InsertWithChildren(item, true);
+            }
         }
 
         public void Save<T>(T item) where T : class
         {
-            database.UpdateWithChildren(item);
+            lock (Locker)
+            {
+                _database.UpdateWithChildren(item);
+            }
         }
 
         public T GetItem<T>(int id) where T : class
         {
-            var item = database.GetWithChildren<T>(id);
-            database.GetChildren(item, true);
-            return item;
+            lock (Locker)
+            {
+                var item = _database.GetWithChildren<T>(id);
+                _database.GetChildren(item, true);
+                return item;
+            }
         }
     }
 }

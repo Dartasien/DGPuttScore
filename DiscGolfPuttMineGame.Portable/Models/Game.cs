@@ -71,6 +71,20 @@ namespace DiscGolfPuttMiniGame.Portable.Models
             }
         }
 
+        private int _totalRounds;
+        public int TotalRounds
+        {
+            get
+            {
+                return _totalRounds;
+            }
+            set
+            {
+                _totalRounds = value;
+                OnPropertyChanged(nameof(TotalRounds));
+            }
+        }
+
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public ObservableCollection<Round> Rounds { get; set; }

@@ -34,7 +34,7 @@ namespace DiscGolfPuttMiniGame.Portable.Views
 
         private void AddRoundsToGame(ScoreTrackerDatabase database)
         {
-            for (var i = 1; i <= 20; i++)
+            for (var i = 1; i <= Game.TotalRounds; i++)
             {
                 var round = new Round
                 {
