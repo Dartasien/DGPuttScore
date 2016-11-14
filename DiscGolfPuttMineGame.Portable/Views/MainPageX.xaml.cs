@@ -39,6 +39,7 @@ namespace DiscGolfPuttMiniGame.Portable.Views
                 database.Insert(player);
             }
             game.IsCurrent = true;
+            game.TotalRounds = int.Parse(RoundCount.Text);
             var addPlayerPage = new AddPlayersX {BindingContext = game};
             Navigation.PushModalAsync(addPlayerPage);
         }
