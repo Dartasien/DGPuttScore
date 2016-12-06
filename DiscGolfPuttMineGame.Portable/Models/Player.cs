@@ -1,162 +1,43 @@
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using DiscGolfPuttMiniGame.Portable.Annotations;
+using System.Collections.Generic;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
-// ReSharper disable UnusedMember.Global
 
 namespace DiscGolfPuttMiniGame.Portable.Models
 {
     [Table("Players")]
-    public class Player : INotifyPropertyChanged
+    public class Player
     {
         public Player()
         {
-            Games = new ObservableCollection<Game>();
+            Games = new List<Game>();
+            Turns = new List<Turn>();
         }
 
-        private int _id;
         [PrimaryKey, AutoIncrement]
-        public int Id
-        {
-            get { return _id; }
-            set
-            {
-                _id = value;
-                OnPropertyChanged(nameof(Id));
-            }
-        }
+        public int Id { get; set; }
 
-        private int _accountId;
-        public int AccountId
-        {
-            get
-            {
-                return _accountId;
-            }
-            set
-            {
-                _accountId = value; 
-                OnPropertyChanged(nameof(AccountId));
-            }
-        }
+        public int AccountId { get; set; }
 
-        private string _firstName;
-        public string FirstName
-        {
-            get
-            {
-                return _firstName;
-            }
-            set
-            {
-                _firstName = value; 
-                OnPropertyChanged(nameof(FirstName));
-            }
-        }
+        public string FirstName { get; set; }
 
-        private string _lastName;
-        public string LastName
-        {
-            get
-            {
-                return _lastName;
-            }
-            set
-            {
-                _lastName = value;
-                OnPropertyChanged(nameof(LastName));
-            }
-        }
+        public string LastName { get; set; }
 
-        private string _nickName;
-        public string NickName
-        {
-            get
-            {
-                return _nickName;
-            }
-            set
-            {
-                _nickName = value;
-                OnPropertyChanged(nameof(NickName));
-            }
-        }
+        public string NickName { get; set; }
 
-        private bool _isDefault;
-        public bool IsDefault
-        {
-            get
-            {
-                return _isDefault;
-            }
-            set
-            {
-                _isDefault = value; 
-                OnPropertyChanged(nameof(IsDefault));
-            }
-        }
+        public bool IsDefault { get; set; }
 
-        private int _gameId;
         [ForeignKey(typeof(Game))]
-        public int GameId
-        {
-            get
-            {
-                return _gameId;
-            }
-            set
-            {
-                _gameId = value;
-                OnPropertyChanged(nameof(GameId));
-            }
-        }
+        public int GameId { get; set; }
 
-        private int _roundId;
-        [ForeignKey(typeof(Round))]
-        public int RoundId
-        {
-            get
-            {
-                return _roundId;
-            }
-            set
-            {
-                _roundId = value;
-                OnPropertyChanged(nameof(RoundId));
-            }
-        }
-
-        private int _turnId;
         [ForeignKey(typeof(Turn))]
-        public int TurnId
-        {
-            get
-            {
-                return _turnId;
-            }
-            set
-            {
-                _turnId = value;
-                OnPropertyChanged(nameof(TurnId));
-            }
-        }
+        public int TurnId { get; set; }
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
-        public ObservableCollection<Turn> Turns { get; set; }
+        public List<Turn> Turns { get; set; }
 
         [ManyToMany(typeof(GamePlayer),CascadeOperations = CascadeOperation.All)]
         // ReSharper disable once MemberCanBePrivate.Global
-        public ObservableCollection<Game> Games { get; set; }
+        public List<Game> Games { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
-
 }

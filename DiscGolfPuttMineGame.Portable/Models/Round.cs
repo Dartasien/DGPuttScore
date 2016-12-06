@@ -1,131 +1,39 @@
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using DiscGolfPuttMiniGame.Portable.Annotations;
+using System.Collections.Generic;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
-// ReSharper disable UnusedMember.Global
 
 namespace DiscGolfPuttMiniGame.Portable.Models
 {
-    public class Round : INotifyPropertyChanged
+    public class Round
     {
         public Round()
         {
-            Turns = new ObservableCollection<Turn>();
+            Turns = new List<Turn>();
         }
 
-        private int _id;
         [PrimaryKey, AutoIncrement]
-        public int Id {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-                OnPropertyChanged(nameof(Id));
-            }
-        }
+        public int Id { get; set; }
 
-        private int _roundCount;
+        public int RoundCount { get; set; }
 
-        public int RoundCount
-        {
-            get
-            {
-                return _roundCount;
-            }
-            set
-            {
-                _roundCount = value;
-                OnPropertyChanged(nameof(RoundCount));
-            }
-        }
+        public bool IsRoundOver { get; set; }
 
-        private bool _isRoundOver;
-        public bool IsRoundOver
-        {
-            get
-            {
-                return _isRoundOver;
-            }
-            set
-            {
-                _isRoundOver = value;
-                OnPropertyChanged(nameof(IsRoundOver));
-            }
-        }
+        public int HighestScore { get; set; }
 
-        private int _score;
-        public int Score
-        {
-            get
-            {
-                return _score;
-            }
-            set
-            {
-                _score = value;
-                OnPropertyChanged(nameof(Score));
-            }
-        }
+        [ForeignKey(typeof(Player))]
+        public int CurrentLeaderId { get; set; }
 
-        private bool _isCurrent;
+        [OneToOne(CascadeOperations = CascadeOperation.All)]
+        public Player CurrentLeader { get; set; }
 
-        public bool IsCurrent
-        {
-            get
-            {
-                return _isCurrent;
-                
-            }
-            set
-            {
-                _isCurrent = value;
-                OnPropertyChanged(nameof(IsCurrent));
-            }
-        }
-
-        private int _gameId;
-
+        public bool IsCurrent { get; set; }
         [ForeignKey(typeof(Game))]
-        public int GameId
-        {
-            get
-            {
-                return _gameId;
-            }
-            set
-            {
-                _gameId = value;
-                OnPropertyChanged(nameof(GameId));
-            }
-        }
+        public int GameId { get; set; }
 
-        private Game _game;
         [ManyToOne]
-        public Game Game {
-            get
-            {
-                return _game;
-            }
-            set
-            {
-                _game = value;
-                OnPropertyChanged(nameof(Game));
-            }
-        }
+        public Game Game { get; set; }
+
         [OneToMany(CascadeOperations = CascadeOperation.All)]
-        public ObservableCollection<Turn> Turns { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public List<Turn> Turns { get; set; }
     }
 }
